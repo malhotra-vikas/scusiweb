@@ -8,7 +8,7 @@ function App() {
   useEffect(() => {
     // Parse the query string from the current URL
     const queryParams = new URLSearchParams(window.location.search);
-    const param = queryParams.get('state');
+    const param = queryParams.get('code');
     if (param) {
       setParamValue(param);
     }
