@@ -3,16 +3,17 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const [paramValue, setParamValue] = useState('');
+  const [queryParams, setQueryParams] = useState({});
 
   useEffect(() => {
     // Parse the query string from the current URL
-    const queryParams = new URLSearchParams(window.location.search);
-    const param = queryParams.get('code');
-    console.log("Code is", param)
-    if (param) {
-      setParamValue(param);
+    const params = new URLSearchParams(window.location.search);
+    const allParams = {};
+    for (const [key, value] of params) {
+      allParams[key] = value;
     }
+    console.log("All query parameters:", allParams);
+    setQueryParams(allParams);
   }, []);
 
   return (
@@ -20,8 +21,13 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>Edit <code>src/App.js</code> and save to reload.</p>
-        {paramValue && (
-          <p>Query parameter value is: {paramValue}</p>
+        {Object.keys(queryParams).length > 0 && (
+          <div>
+            <h3>Query Parameters:</h3>
+            {Object.entries(queryParams).map(([key, value]) => (
+              <p key={key}>{key}: {value}</p>
+            ))}
+          </div>
         )}
         <a
           className="App-link"
