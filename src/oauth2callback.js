@@ -9,6 +9,7 @@ function App() {
     // Parse the query string from the current URL
     const queryParams = new URLSearchParams(window.location.search);
     const param = queryParams.get('code');
+    console.log("Code is", param)
     if (param) {
       setParamValue(param);
     }
